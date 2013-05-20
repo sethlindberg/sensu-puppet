@@ -4,6 +4,7 @@
 #
 # == Parameters
 #
+
 class sensu::client(
   $address        = $::ipaddress,
   $subscriptions  = [],

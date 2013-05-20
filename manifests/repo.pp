@@ -21,6 +21,13 @@ class sensu::repo (
       class { 'sensu::repo::yum': ensure => $ensure }
     }
 
+    'Linux': {
+      if $::kernelrelease =~ /amzn(\d+)\./ {
+        notify { "Operating system is Amazon Linux": }
+        class { 'sensu::repo::yum': ensure => $ensure, isamazon => 'true' }
+      }
+    }
+
     default: { alert("${::operatingsystem} not supported yet") }
 
   }

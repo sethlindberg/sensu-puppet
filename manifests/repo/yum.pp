@@ -4,6 +4,7 @@
 #
 # == Parameters
 #
+# [*ensure*] - add 'absent' to remove. defaults to 'present'.
 
 class sensu::repo::yum (
     $ensure = 'present'
@@ -13,6 +14,12 @@ class sensu::repo::yum (
     'present' => 1,
     default   => 'absent'
   }
+
+  # amazon linux uses centos 6 repository, but has no $releasever.
+  $baseurl = $isamazon ? {
+    false  => 'http://repos.sensuapp.org/yum/el/$releasever/$basearch/',
+    'true' => 'http://repos.sensuapp.org/yum/el/6/$basearch/',
+   }
 
   yumrepo { 'sensu':
     enabled  => $enabled,

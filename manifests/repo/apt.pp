@@ -4,6 +4,8 @@
 #
 # == Parameters
 #
+# [*ensure*] - add 'absent' to remove. defaults to 'present'.
+# [*repo*] - default 'main' or 'unstable'.
 
 class sensu::repo::apt (
     $ensure = 'present',
